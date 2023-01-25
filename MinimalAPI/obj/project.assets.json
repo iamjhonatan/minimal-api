@@ -417,7 +417,8 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "Swashbuckle.AspNetCore >= 6.5.0"
+      "Swashbuckle.AspNetCore >= 6.5.0",
+      "Swashbuckle.AspNetCore.SwaggerGen >= 6.5.0"
     ]
   },
   "packageFolders": {
@@ -458,6 +459,10 @@
         "targetAlias": "net6.0",
         "dependencies": {
           "Swashbuckle.AspNetCore": {
+            "target": "Package",
+            "version": "[6.5.0, )"
+          },
+          "Swashbuckle.AspNetCore.SwaggerGen": {
             "target": "Package",
             "version": "[6.5.0, )"
           }

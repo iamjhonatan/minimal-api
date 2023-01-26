@@ -26,13 +26,13 @@ if (app.Environment.IsDevelopment())
 
 // Endpoints
 
-app.MapGet("/", () => "Hello world!");
+app.MapGet("/todos", async (AppDbContext db) => await db.ToDos.ToListAsync());
 
-app.MapGet("sentences", async () =>
-    await new HttpClient().GetStringAsync("https://ron-swanson-quotes.herokuapp.com/v2/quotes")
+app.MapGet("/todos/{id}", async (int id, AppDbContext db) =>
+    await db.ToDos.FindAsync(id) is { } toDo ? Results.Ok(toDo) : Results.NotFound()
 );
 
-app.MapGet("/todos", async (AppDbContext db) => await db.ToDos.ToListAsync());
+app.MapGet("/todos/completed", async (AppDbContext db) => await db.ToDos.Where(t => t.IsCompleted).ToListAsync());
 
 app.MapPost("/todos", async (ToDo todo, AppDbContext db) =>
 {
